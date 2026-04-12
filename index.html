@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>태성고 축제 인터랙티브 맵</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#1a2a1a; font-family:'Noto Sans KR',sans-serif; min-height:100vh; display:flex; flex-direction:column; align-items:center; }
+
+  header { width:100%; text-align:center; padding:24px 16px 12px; background:linear-gradient(180deg,#0d1f0d 0%,transparent 100%); }
+  header h1 { font-size:2rem; font-weight:900; color:#fff; letter-spacing:-0.03em; text-shadow:0 2px 12px rgba(0,0,0,.5); }
+  header p  { color:#8fbe6b; font-size:.9rem; margin-top:4px; font-weight:600; }
+
+  /* Loader */
+  #loaderBox {
+    margin:30px auto; max-width:500px; width:90%;
+    background:rgba(255,255,255,.07); border:2px dashed #4caf50;
+    border-radius:20px; padding:40px 24px; text-align:center;
+    cursor:pointer; transition:background .2s;
+  }
+  #loaderBox:hover { background:rgba(76,175,80,.14); }
+  #loaderBox .icon { font-size:3rem; margin-bottom:12px; }
+  #loaderBox h2 { color:#fff; font-size:1.1rem; font-weight:700; margin-bottom:8px; }
+  #loaderBox p  { color:#8fbe6b; font-size:.85rem; line-height:1.6; }
+  #fileInput { display:none; }
+
+  /* Map */
+  .map-wrapper { position:relative; width:100%; max-width:900px; margin:0 auto; padding:10px; display:none; }
+  .map-container { position:relative; width:100%; }
+  .map-container img { width:100%; height:auto; display:block; border-radius:20px; box-shadow:0 8px 40px rgba(0,0,0,.6); }
+  .map-overlay { position:absolute; top:0; left:0; width:100%; height:100%; }
+
+  /* Buttons */
+  .booth-btn { position:absolute; background:transparent; border:none; cursor:pointer; border-radius:6px; transition:all .2s; }
+  .booth-btn:hover { background:rgba(255,220,50,.4); box-shadow:0 0 0 3px rgba(255,220,50,.8),0 0 18px rgba(255,220,50,.5); transform:scale(1.12); z-index:10; }
+  .booth-btn .tip {
+    position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%);
+    background:#1a2a1a; color:#fff; font-size:11px; font-weight:700;
+    padding:4px 8px; border-radius:6px; white-space:nowrap;
+    opacity:0; pointer-events:none; transition:opacity .2s;
+    border:1px solid #4caf50; z-index:20; font-family:'Noto Sans KR',sans-serif;
+  }
+  .booth-btn:hover .tip { opacity:1; }
+
+  /* Modal */
+  .backdrop { display:none; position:fixed; inset:0; background:rgba(10,25,10,.78); backdrop-filter:blur(6px); z-index:1000; align-items:center; justify-content:center; padding:20px; }
+  .backdrop.open { display:flex; animation:fadeIn .22s ease; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .modal { background:#fff; border-radius:22px; max-width:480px; width:100%; overflow:hidden; box-shadow:0 28px 70px rgba(0,0,0,.55); animation:slideUp .3s cubic-bezier(.34,1.56,.64,1); }
+  @keyframes slideUp { from{transform:translateY(40px) scale(.93);opacity:0} to{transform:translateY(0) scale(1);opacity:1} }
+
+  .mh { padding:26px 24px 20px; color:#fff; position:relative; }
+  .mnum { font-size:.72rem; font-weight:800; background:rgba(255,255,255,.22); display:inline-block; padding:3px 10px; border-radius:20px; letter-spacing:.1em; margin-bottom:8px; }
+  .mtitle { font-size:1.45rem; font-weight:900; line-height:1.25; }
+  .mcat   { margin-top:7px; font-size:.8rem; opacity:.88; font-weight:600; }
+  .mclose { position:absolute; top:16px; right:16px; background:rgba(255,255,255,.2); border:none; color:#fff; width:32px; height:32px; border-radius:50%; cursor:pointer; font-size:17px; display:flex; align-items:center; justify-content:center; transition:background .18s; }
+  .mclose:hover { background:rgba(255,255,255,.38); }
+
+  .mb { padding:20px 24px 26px; }
+  .memoji { font-size:2.6rem; display:block; margin-bottom:12px; }
+  .igrid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px; }
+  .icard { background:#f4f9f1; border-radius:12px; padding:12px 14px; border-left:3px solid #4caf50; }
+  .icard .lbl { font-size:.68rem; font-weight:800; color:#4caf50; text-transform:uppercase; letter-spacing:.07em; margin-bottom:3px; }
+  .icard .val { font-size:.88rem; font-weight:600; color:#1a2a1a; }
+  .mdesc { font-size:.88rem; color:#444; line-height:1.72; background:#f9f9f9; border-radius:12px; padding:14px 16px; margin-bottom:14px; }
+  .tags  { display:flex; flex-wrap:wrap; gap:6px; }
+  .tag   { font-size:.76rem; font-weight:700; padding:5px 12px; border-radius:20px; border:1px solid; }
+
+  .legend { color:#8fbe6b; font-size:.78rem; text-align:center; padding:10px 16px 28px; opacity:.75; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎉 태성고 축제 부스 맵</h1>
+  <p>번호를 클릭하면 부스 상세정보를 확인할 수 있어요</p>
+</header>
+
+<div id="loaderBox" onclick="document.getElementById('fileInput').click()">
+  <div class="icon">🗺️</div>
+  <h2>칼라 축제 맵 이미지를 불러오세요</h2>
+  <p>
+    <strong style="color:#fff">20412.png</strong> 파일을 클릭하여 선택하거나<br>
+    이 영역으로 드래그&드롭 해주세요
+  </p>
+  <input type="file" id="fileInput" accept="image/*">
+</div>
+
+<div class="map-wrapper" id="mapWrapper">
+  <div class="map-container">
+    <img id="mapImg" src="" alt="축제 맵">
+    <div class="map-overlay" id="mapOverlay"></div>
+  </div>
+</div>
+
+<div class="legend">💡 마우스를 올리면 부스명이, 클릭하면 상세정보가 표시됩니다</div>
+
+<!-- Modal -->
+<div class="backdrop" id="backdrop">
+  <div class="modal">
+    <div class="mh" id="mh">
+      <span class="mnum"  id="mnum"></span>
+      <button class="mclose" id="mclose">✕</button>
+      <div class="mtitle" id="mtitle"></div>
+      <div class="mcat"   id="mcat"></div>
+    </div>
+    <div class="mb">
+      <span class="memoji" id="memoji"></span>
+      <div class="igrid"  id="igrid"></div>
+      <div class="mdesc"  id="mdesc"></div>
+      <div class="tags"   id="mtags"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const booths = [
+  {id:1,  name:"태성80주년 역사관",           emoji:"🏛️",cat:"전시",         loc:"좌측 스탠드 앞",  time:"10:00~17:00",desc:"태성고등학교 창립 80주년을 기념하는 역사 전시관입니다. 개교 이래의 역사적 사진, 졸업앨범, 주요 사건들을 연대순으로 전시합니다. 우리 학교의 뿌리를 되돌아보는 특별한 공간입니다.",tags:["역사","전시","사진","80주년"]},
+  {id:2,  name:"중학교 챌린지 부스",          emoji:"🎯",cat:"체험",         loc:"좌측 스탠드 앞",  time:"10:00~17:00",desc:"예비 고등학생 중학교 친구들을 위한 특별 챌린지 부스입니다. 다양한 미션을 수행하고 선물을 받아가세요! 태성고 학교생활을 미리 체험할 수 있는 프로그램도 준비되어 있습니다.",tags:["중학생","챌린지","체험","선물"]},
+  {id:3,  name:"태성비전탑쌓기",              emoji:"🏗️",cat:"체험/전시",    loc:"좌측 스탠드 앞",  time:"10:00~16:00",desc:"태성고의 미래 비전을 담은 탑 쌓기 체험 부스입니다. 학생들이 직접 작성한 꿈과 목표 카드를 탑에 붙이고 함께 미래를 그려봅니다.",tags:["비전","꿈","미래","전시"]},
+  {id:4,  name:"미술체험",                    emoji:"🎨",cat:"예술/체험",    loc:"좌측 하단",       time:"10:00~17:00",desc:"미술부 학생들이 운영하는 다양한 아트 체험 부스입니다. 캐리커처, 수채화 엽서 만들기, 에코백 그림 그리기 등 다채로운 프로그램을 즐겨보세요. 재료비 무료!",tags:["미술","캐리커처","에코백","무료"]},
+  {id:5,  name:"중·학부모 먹거리",            emoji:"🍱",cat:"먹거리",       loc:"하단 좌측",       time:"11:00~15:00",desc:"중학생 학부모님들이 직접 준비한 맛있는 먹거리 부스입니다. 떡볶이, 순대, 김밥 등 다양한 간식이 준비되어 있으며, 수익금의 일부는 장학금으로 쓰입니다.",tags:["먹거리","학부모","간식","장학금"]},
+  {id:6,  name:"중·학부모 먹거리",            emoji:"🍜",cat:"먹거리",       loc:"하단",            time:"11:00~15:00",desc:"학부모님들이 사랑을 담아 준비한 따뜻한 음식 부스입니다. 오뎅탕, 만두, 튀김 등 든든한 한 끼를 저렴한 가격에 즐길 수 있습니다.",tags:["먹거리","학부모","따뜻한음식"]},
+  {id:7,  name:"중·학부모 먹거리",            emoji:"🧁",cat:"먹거리",       loc:"하단",            time:"11:00~15:00",desc:"달콤한 디저트를 판매하는 먹거리 부스입니다. 컵케이크, 마카롱, 쿠키 등 직접 만든 수제 디저트를 맛보세요!",tags:["디저트","수제","쿠키","달콤"]},
+  {id:8,  name:"중·학부모 바자회",            emoji:"🛍️",cat:"바자회",       loc:"하단 중앙",       time:"10:00~16:00",desc:"중학교 학부모님들이 준비한 알뜰 바자회입니다. 의류, 생활용품, 도서 등 다양한 물품을 합리적인 가격에 구매할 수 있습니다.",tags:["바자회","학부모","의류","도서"]},
+  {id:9,  name:"고·라이사이클링 교복행사",    emoji:"♻️",cat:"환경/행사",    loc:"하단",            time:"10:00~17:00",desc:"교복 라이사이클링 캠페인 부스입니다. 더 이상 입지 않는 교복을 기부하고, 필요한 교복을 저렴하게 구매할 수 있습니다.",tags:["교복","재활용","환경","기부"]},
+  {id:10, name:"고·학생회 후식부스",          emoji:"🧃",cat:"먹거리",       loc:"하단",            time:"11:00~16:00",desc:"고등학교 학생회가 운영하는 후식 부스입니다. 아이스크림, 과일, 음료 등 달콤한 후식을 저렴하게 만나보세요!",tags:["후식","학생회","아이스크림","음료"]},
+  {id:11, name:"네컷사진",                    emoji:"📸",cat:"포토/체험",    loc:"하단 우측",       time:"10:00~17:00",desc:"친구들과 함께 추억을 남길 수 있는 네컷사진 부스입니다. 다양한 소품과 예쁜 배경으로 특별한 축제의 순간을 사진으로 남겨보세요!",tags:["사진","포토부스","추억","즉석인화"]},
+  {id:12, name:"태권도홍보부스",              emoji:"🥋",cat:"스포츠/체험",  loc:"하단 우측",       time:"10:00~17:00",desc:"태권도부 학생들이 운영하는 홍보 부스입니다. 태권도 기본 동작 체험, 격파 시연 관람 등 다양한 프로그램이 준비되어 있습니다.",tags:["태권도","체험","시연","스포츠"]},
+  {id:13, name:"방송부 부스",                 emoji:"🎙️",cat:"방송/체험",    loc:"우측 하단",       time:"10:00~17:00",desc:"방송부가 운영하는 미디어 체험 부스입니다. 직접 MC가 되어 방송을 진행해보는 체험, 라디오 DJ 체험 등 다양한 방송 관련 활동을 즐길 수 있습니다.",tags:["방송","MC체험","라디오","미디어"]},
+  {id:14, name:"굿즈 판매",                   emoji:"🎁",cat:"판매",         loc:"우측",            time:"10:00~17:00",desc:"태성고 축제 공식 굿즈를 판매하는 부스입니다. 한정판 스티커, 키링, 에코백, 머그컵 등 다양한 기념품을 구매하실 수 있습니다.",tags:["굿즈","기념품","한정판","스티커"]},
+  {id:15, name:"흡연실천예방",                emoji:"🚭",cat:"보건/캠페인",  loc:"우측",            time:"10:00~16:00",desc:"금연 캠페인 부스입니다. 흡연의 위험성을 알리는 전시와 함께, 금연 다짐 서약서 작성, 건강 퀴즈 등의 프로그램이 운영됩니다.",tags:["금연","건강","캠페인","보건"]},
+  {id:16, name:"어울리고용기봄고",            emoji:"🌸",cat:"문화/나눔",    loc:"우측",            time:"10:00~17:00",desc:"더불어 함께하는 봄 축제 나눔 부스입니다. 용기를 내어 새로운 친구에게 말을 걸고, 함께하는 즐거움을 나누는 특별한 공간입니다.",tags:["나눔","우정","소통","봄축제"]},
+  {id:17, name:"O,X퀴즈",                     emoji:"❓",cat:"게임/이벤트",  loc:"우측",            time:"11:00~15:00",desc:"태성고와 관련된 OX 퀴즈 이벤트 부스입니다. 학교 역사, 선생님에 관한 재미있는 퀴즈를 풀고 상품을 받아가세요!",tags:["퀴즈","이벤트","상품","게임"]},
+  {id:18, name:"농구 자유투 챌린지",          emoji:"🏀",cat:"스포츠/게임",  loc:"우측(농구장 옆)", time:"10:00~17:00",desc:"농구 자유투 챌린지 부스입니다! 정해진 횟수 안에 최대한 많은 공을 넣어보세요. 랭킹 1위에게는 특별 경품이 주어집니다.",tags:["농구","자유투","챌린지","경품"]},
+  {id:19, name:"축구PK챌린지",                emoji:"⚽",cat:"스포츠/게임",  loc:"우측",            time:"10:00~17:00",desc:"축구 페널티킥 챌린지 부스입니다! 골키퍼를 뚫고 골을 넣어보세요. 연속 성공 기록에 따라 다양한 상품이 준비되어 있습니다.",tags:["축구","PK","챌린지","골"]},
+  {id:20, name:"물풍선 피구 드라이존",        emoji:"💦",cat:"게임/이벤트",  loc:"우측 중앙",       time:"13:00~17:00",desc:"물풍선 피구 게임을 위한 준비 구역입니다. 팀을 구성하고 물풍선을 받아 신나는 피구 게임을 즐겨보세요! 여름 축제의 하이라이트입니다.",tags:["물풍선","피구","게임","여름"]},
+  {id:21, name:"삐보삐보119",                 emoji:"🚑",cat:"안전/체험",    loc:"우측",            time:"10:00~16:00",desc:"119 안전 체험 부스입니다. CPR(심폐소생술) 체험, 화재 대피 시뮬레이션, 응급처치 기초 교육 등 실생활에 꼭 필요한 안전 지식을 배울 수 있습니다.",tags:["안전","CPR","응급처치","119"]},
+  {id:22, name:"태성나눔챌린지 풍선다트",     emoji:"🎯",cat:"게임/나눔",    loc:"우측 상단",       time:"10:00~17:00",desc:"풍선 다트 게임을 즐기며 나눔도 함께 실천하는 부스입니다. 게임 참가비의 일부는 지역 사회 나눔 기금으로 적립됩니다.",tags:["다트","게임","나눔","경품"]},
+  {id:23, name:"드론축구",                    emoji:"🚁",cat:"첨단기술/체험",loc:"우측 상단",       time:"10:00~17:00",desc:"미래 스포츠인 드론 축구를 체험할 수 있는 부스입니다! 드론을 직접 조종하여 골을 넣어보는 색다른 경험을 해보세요.",tags:["드론","축구","첨단기술","체험"]},
+  {id:24, name:"페이스페인팅·헤나부스",       emoji:"🎭",cat:"미용/체험",    loc:"우측 상단",       time:"10:00~17:00",desc:"전문 아티스트가 진행하는 페이스페인팅과 헤나 부스입니다. 원하는 디자인을 선택하고 특별한 축제 메이크업을 즐겨보세요!",tags:["페이스페인팅","헤나","아트","체험"]},
+  {id:25, name:"버스킹 무대",                 emoji:"🎵",cat:"공연/버스킹",  loc:"중앙(버스킹존)",  time:"11:00~17:00",desc:"축제의 중심! 버스킹 무대입니다. 재능 있는 학생들의 즉흥 공연이 이어집니다. 밴드, 댄스, 마술, 독주 등 다양한 장르의 공연을 감상하세요.",tags:["버스킹","공연","밴드","댄스"]},
+  {id:26, name:"공돌이 용달이 특강",          emoji:"🔬",cat:"교육/강연",    loc:"공연장(정의관)",  time:"13:00~15:00",desc:"이공계를 꿈꾸는 학생들을 위한 특별 강연입니다. 현직 엔지니어와 과학자들이 진행하는 생생한 진로 토크와 미래 과학기술 트렌드를 들을 수 있습니다.",tags:["특강","이공계","진로","강연"]},
+  {id:27, name:"고·학생회 후식부스",          emoji:"🍦",cat:"먹거리",       loc:"상단 우측",       time:"11:00~16:00",desc:"고등학교 학생회가 정성껏 준비한 후식 부스입니다. 시원한 아이스크림과 달콤한 간식으로 축제의 즐거움을 더해보세요!",tags:["후식","학생회","아이스크림","간식"]},
+  {id:28, name:"고·학부모 바자회",            emoji:"🏷️",cat:"바자회",       loc:"상단",            time:"10:00~16:00",desc:"고등학교 학부모님들이 알차게 준비한 바자회입니다. 문구류, 생활용품, 의류, 핸드메이드 소품 등 실용적인 물품들이 저렴하게 판매됩니다.",tags:["바자회","학부모","생활용품","핸드메이드"]},
+  {id:29, name:"고·학부모 바자회",            emoji:"🎀",cat:"바자회",       loc:"상단",            time:"10:00~16:00",desc:"다양한 소품과 잡화를 합리적인 가격에 만날 수 있는 학부모 바자회 부스입니다. 직접 만든 수공예품과 베이킹 제품도 함께 판매합니다.",tags:["바자회","수공예","베이킹","잡화"]},
+  {id:30, name:"고·학부모 바자회",            emoji:"📦",cat:"바자회",       loc:"상단",            time:"10:00~16:00",desc:"학부모님들의 정성이 담긴 바자회 부스입니다. 책, 완구, 주방용품 등 다양한 중고 물품이 저렴하게 판매됩니다.",tags:["바자회","중고","책","환경"]},
+  {id:31, name:"고·막거리코너",               emoji:"🥘",cat:"먹거리",       loc:"상단",            time:"11:00~15:00",desc:"전통 먹거리가 가득한 코너입니다. 전, 부침개, 떡, 식혜 등 한국 전통 간식을 맛볼 수 있습니다.",tags:["전통음식","먹거리","전","식혜"]},
+  {id:32, name:"고·막거리코너",               emoji:"🍢",cat:"먹거리",       loc:"상단",            time:"11:00~15:00",desc:"인기 간식들이 모여있는 먹거리 코너입니다. 어묵, 순대, 떡볶이 등 축제의 필수 간식들을 한자리에서 즐겨보세요!",tags:["어묵","순대","떡볶이","간식"]},
+  {id:33, name:"고·막거리코너",               emoji:"🍕",cat:"먹거리",       loc:"상단 좌측",       time:"11:00~15:00",desc:"외국 음식 테마의 먹거리 코너입니다. 피자, 타코, 핫도그 등 세계 각국의 인기 길거리 음식을 맛볼 수 있습니다.",tags:["외국음식","피자","타코","핫도그"]},
+  {id:34, name:"군악대 쉼터",                 emoji:"🎺",cat:"공연/휴게",    loc:"좌측 상단",       time:"10:00~17:00",desc:"군악대 연주를 감상하며 쉬어갈 수 있는 공간입니다. 정시 군악 퍼레이드 공연도 준비되어 있으며, 악기 전시 및 체험도 가능합니다.",tags:["군악대","공연","쉼터","악기"]},
+  {id:35, name:"군악대 쉼터",                 emoji:"🥁",cat:"공연/휴게",    loc:"좌측",            time:"10:00~17:00",desc:"군악대 제2 쉼터입니다. 군악 연주를 배경으로 편안하게 쉬어갈 수 있는 공간입니다. 군악대 단원들과 함께 기념사진을 찍을 수 있는 포토 타임도 운영됩니다.",tags:["군악대","휴게","포토타임","공연"]},
+  {id:36, name:"총동문회 퍼팅대회",           emoji:"⛳",cat:"스포츠/이벤트",loc:"좌측",            time:"10:00~16:00",desc:"태성고 총동문회가 개최하는 미니 골프 퍼팅 대회입니다. 동문 선배님들과 재학생들이 함께 참여하여 세대를 넘는 교류의 장이 됩니다.",tags:["골프","퍼팅","동문","대회"]},
+  {id:37, name:"총동문회 장학금부스",         emoji:"🎓",cat:"장학/행사",    loc:"좌측",            time:"10:00~17:00",desc:"총동문회에서 운영하는 장학금 관련 부스입니다. 장학금 신청 안내, 동문 진로 멘토링 신청, 선배들의 합격 수기 전시 등이 이루어집니다.",tags:["장학금","동문","멘토링","진로"]},
+  {id:38, name:"태성의3C설명Zone",            emoji:"💡",cat:"교육/홍보",    loc:"좌측",            time:"10:00~17:00",desc:"태성고의 교육 철학 3C(Creativity, Challenge, Cooperation)를 소개하는 부스입니다. 학교 교육 방침과 비전, 특색 교육 프로그램을 상세히 안내합니다.",tags:["교육","3C","학교홍보","입학상담"]},
+  {id:39, name:"SNS가입독려 관리본부",        emoji:"📱",cat:"홍보/이벤트",  loc:"좌측(본부 옆)",   time:"10:00~17:00",desc:"태성중고등학교 공식 SNS 채널 홍보 부스입니다. 인스타그램, 유튜브, 카카오채널 팔로우 시 소정의 선물을 드립니다.",tags:["SNS","인스타그램","유튜브","홍보"]},
+  {id:40, name:"태성여권·우비나누기",         emoji:"🌂",cat:"나눔/이벤트",  loc:"좌측(본부 앞)",   time:"10:00~17:00",desc:"태성고 특별 여권(스탬프북)과 우비를 나눠주는 부스입니다. 태성여권을 받아 각 부스를 돌며 스탬프를 모아보세요! 스탬프를 다 모으면 특별한 경품을 드립니다.",tags:["여권","스탬프","우비","이벤트"]},
+];
+
+const positions = [
+  {id:1, x:17.0,y:56.8,w:5.5,h:3.2},{id:2, x:17.0,y:61.5,w:5.5,h:3.2},
+  {id:3, x:17.0,y:66.2,w:5.5,h:3.2},{id:4, x:17.0,y:70.9,w:5.5,h:3.2},
+  {id:5, x:23.5,y:78.8,w:4.8,h:3.4},{id:6, x:29.5,y:78.8,w:4.8,h:3.4},
+  {id:7, x:35.5,y:78.8,w:4.8,h:3.4},{id:8, x:41.5,y:78.8,w:4.8,h:3.4},
+  {id:9, x:47.5,y:78.8,w:4.8,h:3.4},{id:10,x:53.5,y:78.8,w:4.8,h:3.4},
+  {id:11,x:59.5,y:78.8,w:4.8,h:3.4},{id:12,x:65.5,y:78.8,w:4.8,h:3.4},
+  {id:13,x:73.5,y:74.0,w:5.0,h:3.2},{id:14,x:73.5,y:69.5,w:5.0,h:3.2},
+  {id:15,x:73.5,y:64.8,w:5.0,h:3.2},{id:16,x:73.5,y:60.2,w:5.0,h:3.2},
+  {id:17,x:73.5,y:55.5,w:5.0,h:3.2},{id:18,x:73.5,y:50.8,w:5.0,h:3.2},
+  {id:19,x:73.5,y:46.2,w:5.0,h:3.2},{id:20,x:73.5,y:41.5,w:5.0,h:3.2},
+  {id:21,x:73.5,y:36.8,w:5.0,h:3.2},{id:22,x:73.5,y:32.2,w:5.0,h:3.2},
+  {id:23,x:73.5,y:27.5,w:5.0,h:3.2},{id:24,x:73.5,y:22.8,w:5.0,h:3.2},
+  {id:25,x:44.5,y:62.5,w:5.5,h:3.5},{id:26,x:56.0,y:86.5,w:5.5,h:3.5},
+  {id:27,x:65.5,y:16.5,w:4.8,h:3.4},{id:28,x:59.5,y:16.5,w:4.8,h:3.4},
+  {id:29,x:53.5,y:16.5,w:4.8,h:3.4},{id:30,x:47.5,y:16.5,w:4.8,h:3.4},
+  {id:31,x:41.5,y:16.5,w:4.8,h:3.4},{id:32,x:35.5,y:16.5,w:4.8,h:3.4},
+  {id:33,x:29.5,y:16.5,w:4.8,h:3.4},{id:34,x:22.0,y:22.5,w:5.5,h:3.2},
+  {id:35,x:22.0,y:27.2,w:5.5,h:3.2},{id:36,x:22.0,y:31.8,w:5.5,h:3.2},
+  {id:37,x:22.0,y:36.5,w:5.5,h:3.2},{id:38,x:22.0,y:41.2,w:5.5,h:3.2},
+  {id:39,x:22.0,y:45.8,w:5.5,h:3.2},{id:40,x:22.0,y:50.5,w:5.5,h:3.2},
+];
+
+const cc = {"전시":"#5c6bc0","체험":"#26a69a","예술/체험":"#ec407a","먹거리":"#ff7043","바자회":"#ab47bc","환경/행사":"#66bb6a","포토/체험":"#ef5350","스포츠/체험":"#42a5f5","스포츠/게임":"#29b6f6","게임/이벤트":"#f9a825","게임/나눔":"#ff8f00","공연/버스킹":"#8d6e63","공연/휴게":"#607d8b","교육/강연":"#7e57c2","첨단기술/체험":"#26c6da","미용/체험":"#f06292","보건/캠페인":"#66bb6a","안전/체험":"#ef5350","문화/나눔":"#ffb300","방송/체험":"#455a64","판매":"#8d6e63","나눔/이벤트":"#42a5f5","홍보/이벤트":"#26a69a","교육/홍보":"#7e57c2","장학/행사":"#ffa726","스포츠/이벤트":"#26a69a","체험/전시":"#5c6bc0"};
+const gc = c => cc[c]||"#4caf50";
+
+// File loader
+const fi = document.getElementById('fileInput');
+const lb = document.getElementById('loaderBox');
+const mw = document.getElementById('mapWrapper');
+const mi = document.getElementById('mapImg');
+const mo = document.getElementById('mapOverlay');
+
+lb.addEventListener('dragover', e=>{e.preventDefault();lb.style.background='rgba(76,175,80,.2)';});
+lb.addEventListener('dragleave',()=>{lb.style.background='';});
+lb.addEventListener('drop',e=>{e.preventDefault();lb.style.background='';const f=e.dataTransfer.files[0];if(f&&f.type.startsWith('image/'))load(f);});
+fi.addEventListener('change',e=>{if(e.target.files[0])load(e.target.files[0]);});
+
+function load(file){
+  const r=new FileReader();
+  r.onload=ev=>{
+    mi.src=ev.target.result;
+    lb.style.display='none';
+    mw.style.display='block';
+    build();
+  };
+  r.readAsDataURL(file);
+}
+
+function build(){
+  mo.innerHTML='';
+  positions.forEach(p=>{
+    const b=booths.find(x=>x.id===p.id);
+    const btn=document.createElement('button');
+    btn.className='booth-btn';
+    btn.style.cssText=`left:${p.x}%;top:${p.y}%;width:${p.w}%;height:${p.h}%;`;
+    const t=document.createElement('span');
+    t.className='tip';
+    t.textContent=`#${p.id} ${b?b.name:''}`;
+    btn.appendChild(t);
+    btn.addEventListener('click',()=>open_(p.id));
+    mo.appendChild(btn);
+  });
+}
+
+// Modal
+const bd=document.getElementById('backdrop');
+function open_(id){
+  const b=booths.find(x=>x.id===id);if(!b)return;
+  const c=gc(b.cat);
+  document.getElementById('mh').style.background=`linear-gradient(135deg,${c}cc,${c})`;
+  document.getElementById('mnum').textContent=`BOOTH #${b.id}`;
+  document.getElementById('mtitle').textContent=b.name;
+  document.getElementById('mcat').textContent=`📍 ${b.cat}`;
+  document.getElementById('memoji').textContent=b.emoji;
+  document.getElementById('mdesc').textContent=b.desc;
+  document.getElementById('igrid').innerHTML=`
+    <div class="icard"><div class="lbl">📍 위치</div><div class="val">${b.loc}</div></div>
+    <div class="icard"><div class="lbl">🕐 운영시간</div><div class="val">${b.time}</div></div>`;
+  document.getElementById('mtags').innerHTML=b.tags.map(t=>`<span class="tag" style="color:${c};border-color:${c}55;background:${c}18">#${t}</span>`).join('');
+  bd.classList.add('open');
+}
+document.getElementById('mclose').addEventListener('click',()=>bd.classList.remove('open'));
+bd.addEventListener('click',e=>{if(e.target===bd)bd.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')bd.classList.remove('open');});
+</script>
+</body>
+</html>
