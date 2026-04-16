@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>동천제 인터랙티브 맵</title>
+<title>태성중 개교 80주년, 태성빌리지, 동천제 축제</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -113,13 +113,13 @@ header p{color:#a0b4f0;font-size:.83rem;margin-top:3px;font-weight:600}
 <body>
 
 <header>
-  <h1>🎉 동천제 인터랙티브 맵</h1>
-  <p>태성고등학교 80주년 축제 · 부스 번호 또는 공연장을 클릭하세요</p>
+  <h1>🎉 태성빌리지(동천제) 맵</h1>
+  <p>태성중 개교 80주년 기념,  축제 · 부스 번호 또는 공연장을 클릭하세요</p>
 </header>
 
 <div class="notice">
   <span class="icon">👆</span>
-  <span><strong>지도 위 부스 번호를 클릭</strong>하면 부스 이름·위치·운영시간·상세 안내를 확인할 수 있어요! 하단 <strong>41 공연장</strong>도 클릭해보세요 🎤</span>
+  <span><strong>지도 위 부스 번호를 클릭</strong>하면 부스 이름·위치·운영시간·상세 안내를 확인할 수 있어요! 하단 <strong>공연장</strong>도 클릭해보세요 🎤</span>
 </div>
 
 
@@ -130,7 +130,7 @@ header p{color:#a0b4f0;font-size:.83rem;margin-top:3px;font-weight:600}
     <div class="map-overlay" id="mapOverlay"></div>
   </div>
 </div>
-<div class="footer-hint">💡 마우스를 올리면 노란 하이라이트 | 공연장(파란색)을 클릭하면 공연 일정 확인</div>
+<div class="footer-hint">💡 마우스를 올리면 하이라이트 | 공연장(파란색)을 클릭하면 공연 일정 확인 가능</div>
 
 <!-- 부스 Modal -->
 <div class="backdrop" id="backdrop">
@@ -159,32 +159,31 @@ header p{color:#a0b4f0;font-size:.83rem;margin-top:3px;font-weight:600}
     <div class="mh" style="background:linear-gradient(135deg,#1a5276,#2e86c1)">
       <div><span class="mbadge">BOOTH #41</span><span class="mtype-badge">🎤 공연장</span></div>
       <button class="mclose" id="stageMclose">✕</button>
-      <div class="mtitle">공연장 (정의관)</div>
-      <div class="mcat">📍 하단 중앙 · 메인 공연 무대</div>
+      <div class="mtitle">공연장 (키움관)</div>
+      <div class="mcat">📍 키움관 · 메인 공연 무대</div>
     </div>
     <div class="mb">
       <span class="memoji">🎪</span>
       <div class="igrid">
         <div class="icard" style="background:#e3f2fd;border-left-color:#2e86c1">
           <div class="lbl" style="color:#2e86c1">📍 위치</div>
-          <div class="val">정의관 앞 야외무대</div>
+          <div class="val">키움관 내 무대</div>
         </div>
         <div class="icard" style="background:#e3f2fd;border-left-color:#2e86c1">
           <div class="lbl" style="color:#2e86c1">🕐 운영시간</div>
-          <div class="val">10:00 ~ 18:00</div>
+          <div class="val">18:30 ~ 20:00</div>
         </div>
       </div>
       <div class="mdesc">태성고 동천제의 메인 공연장입니다. 학생들의 끼와 재능을 마음껏 펼치는 무대로, 밴드 공연, 댄스 퍼포먼스, 특강, 시상식 등 다양한 프로그램이 진행됩니다.</div>
       <div style="font-size:.78rem;font-weight:800;color:#2e86c1;text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">📅 공연 일정</div>
       <ul class="schedule-list">
-        <li><span class="time-badge">10:00</span><span class="act">🎤 개막식 · 교장선생님 인사 · 80주년 기념사</span></li>
-        <li><span class="time-badge">11:00</span><span class="act">🎸 밴드부 공연</span></li>
-        <li><span class="time-badge">12:30</span><span class="act">💃 댄스부 퍼포먼스</span></li>
-        <li><span class="time-badge">13:00</span><span class="act">🔬 공돌이용달이 특강 (정의관 내부)</span></li>
-        <li><span class="time-badge">14:30</span><span class="act">🎭 연극부 공연</span></li>
-        <li><span class="time-badge">15:30</span><span class="act">🏆 부스 경연 시상식</span></li>
-        <li><span class="time-badge">16:30</span><span class="act">🎉 전교생 합창 · 피날레</span></li>
-        <li><span class="time-badge">17:30</span><span class="act">🌟 폐막식 · OB선생님 특별 공연</span></li>
+        <li><span class="time-badge">18:20</span><span class="act">🎤 개막식 · 교장선생님 인사 · 80주년 기념사</span></li>
+        <li><span class="time-badge">18:30</span><span class="act">🎸 중. 밴드부 공연</span></li>
+        <li><span class="time-badge">18:50</span><span class="act">💃 고. 밴드부 공연</span></li>
+        <li><span class="time-badge">19:10</span><span class="act">🔬 고등학교 댄스팀 공연</span></li>
+        <li><span class="time-badge">19:20</span><span class="act">🎭 10분간 휴식</span></li>
+        <li><span class="time-badge">19:30</span><span class="act">🏆 특별 공연</span></li>
+        <li><span class="time-badge">20:00</span><span class="act">🎉 폐막식</span></li>
       </ul>
       <div class="tags">
         <span class="tag" style="color:#2e86c1;border-color:#2e86c155;background:#2e86c118">#메인무대</span>
