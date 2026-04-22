@@ -415,6 +415,18 @@ section { padding: 96px 5%; }
   letter-spacing: .08em; padding: 4px 10px; border-radius: 12px;
   margin-bottom: 10px;
 }
+.popup-header-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.popup-header-row .popup-type { margin-bottom: 0; }
+.popup-num {
+  font-size: 11px; font-weight: 700;
+  color: var(--muted);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  padding: 4px 10px; border-radius: 12px;
+  letter-spacing: .04em;
+}
 .popup-emoji { font-size: 42px; margin-bottom: 8px; display: block; line-height: 1; }
 .popup-name { font-family: 'Black Han Sans', sans-serif; font-size: 26px; margin-bottom: 6px; line-height: 1.2; }
 .popup-meta {
@@ -904,7 +916,10 @@ footer {
   <div class="popup-card">
     <button class="popup-close" onclick="closePopup()">✕</button>
     <span class="popup-emoji" id="popEmoji">🎵</span>
-    <div class="popup-type" id="popType" style="background: var(--t-basic-lt); color: var(--t-basic-tx);">일반부스</div>
+    <div class="popup-header-row">
+      <div class="popup-type" id="popType" style="background: var(--t-basic-lt); color: var(--t-basic-tx);">일반부스</div>
+      <div class="popup-num" id="popNum">#01</div>
+    </div>
     <div class="popup-name display" id="popName">버스킹 무대</div>
     <div class="popup-meta">
       <span id="popCat">🏷️ 공연/버스킹</span>
@@ -1547,6 +1562,7 @@ function openPopup(b) {
   pop.style.background = TYPE_BG[b.type];
   pop.style.color = TYPE_TX[b.type];
   document.getElementById('popEmoji').textContent = b.emoji;
+  document.getElementById('popNum').textContent = '#' + String(b.id).padStart(2, '0');
   document.getElementById('popName').textContent = b.name;
   document.getElementById('popCat').textContent = '🏷️ ' + b.cat;
   document.getElementById('popLoc').textContent = '📍 ' + b.loc;
