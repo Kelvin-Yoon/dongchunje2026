@@ -529,6 +529,11 @@ section { padding: 96px 5%; }
 .tt-block.special .tt-name { color: var(--navy); }
 .tt-team { font-size: 11px; opacity: .7; margin-top: 3px; }
 .tt-block.special .tt-team { color: var(--navy); opacity: .7; }
+/* sub/small 블록: 어두운 배경에 글씨가 잘 보이도록 밝은 색으로 */
+.tt-block.sub .tt-time,
+.tt-block.small .tt-time { opacity: 1; color: rgba(255,255,255,.85); }
+.tt-block.sub .tt-team,
+.tt-block.small .tt-team { opacity: 1; color: rgba(255,255,255,.80); }
 
 .event-cards { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 32px; }
 .event-card {
