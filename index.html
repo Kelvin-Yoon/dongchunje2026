@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<!-- saved from url=(0043)file:///C:/Users/User/Desktop/index_v2.html -->
 <html lang="ko"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>동천제 2026 — 태성중·고 80주년 기념 축제</title>
-<link rel="preconnect" href="https://fonts.googleapis.com/">
-<link href="./index_v2_files/css2" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --orange: #ad4243;
@@ -21,22 +21,18 @@
 
   /* ── 타입 컬러 (창조/연결/도전/기본) ── */
   --t-create:     #9b59b6;
-  --t-create-2:   #c471ed;
   --t-create-lt:  #f8edff;
   --t-create-tx:  #8e44ad;
 
   --t-connect:    #2980b9;
-  --t-connect-2:  #5b9bd5;
   --t-connect-lt: #e8f4ff;
   --t-connect-tx: #2471a3;
 
   --t-challenge:    #e67e22;
-  --t-challenge-2:  #f5c518;
   --t-challenge-lt: #fff9e0;
   --t-challenge-tx: #b7470a;
 
   --t-basic:    #a89070;
-  --t-basic-2:  #c8b89a;
   --t-basic-lt: #faf7f2;
   --t-basic-tx: #7a6040;
 }
@@ -298,26 +294,6 @@ section { padding: 96px 5%; }
   background-repeat: no-repeat;
   background-position: center;
 }
-/* 운동장 외곽 */
-.field-outline {
-  position: absolute; left: 22%; top: 20%; width: 58%; height: 70%;
-  border: 2px dashed rgba(26,26,46,.18);
-  border-radius: 18px;
-  pointer-events: none;
-}
-.field-label {
-  position: absolute; left: 50%; top: 14%; transform: translateX(-50%);
-  font-family: 'Black Han Sans', sans-serif; font-size: 14px;
-  color: rgba(26,26,46,.35); letter-spacing: .1em;
-}
-.stage-marker {
-  position: absolute; left: 50.6%; top: 69.6%; transform: translate(-50%,-50%);
-  background: var(--navy); color: var(--yellow);
-  font-family: 'Black Han Sans', sans-serif;
-  font-size: 12px; padding: 7px 16px; border-radius: 24px;
-  border: 2px solid var(--yellow); white-space: nowrap; z-index: 4;
-  box-shadow: 0 4px 16px rgba(0,0,0,.2); pointer-events: none;
-}
 
 .pin {
   position: absolute; transform: translate(-50%, -60%);
@@ -464,7 +440,6 @@ section { padding: 96px 5%; }
 .bf-chip.on-challenge { background: var(--t-challenge);  color: #fff; border-color: var(--t-challenge); }
 .bf-chip.on-basic     { background: var(--t-basic);      color: #fff; border-color: var(--t-basic); }
 
-
 .booth-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -492,7 +467,6 @@ section { padding: 96px 5%; }
 .bc-loc { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
 .bc-time { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
 .bc-desc { font-size: 12px; color: var(--muted); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-.bc.hidden { display: none; }
 
 /* ── S5 TIMETABLE ── */
 #timetable { background: var(--navy); }
@@ -568,26 +542,6 @@ section { padding: 96px 5%; }
   border: 2px solid var(--border); overflow: hidden; position: relative;
   font-size: 14px; color: var(--muted);
 }
-/* Simple decorative map */
-.map-decoration {
-  position: absolute; inset: 0;
-  background: #E8EFFF;
-}
-.map-road-h { position: absolute; height: 20px; background: #fff; left: 0; right: 0; }
-.map-road-v { position: absolute; width: 20px; background: #fff; top: 0; bottom: 0; }
-.map-school {
-  position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%);
-  background: var(--orange); color: white; border-radius: 10px;
-  padding: 12px 20px; text-align: center;
-  font-family: 'Black Han Sans', sans-serif; font-size: 16px;
-  box-shadow: 0 4px 16px rgba(255,107,43,.4);
-}
-.map-school small { display: block; font-family: 'Noto Sans KR', sans-serif; font-size: 11px; font-weight: 400; opacity: .8; margin-top: 2px; }
-.map-pin-label {
-  position: absolute; font-size: 10px; background: white;
-  padding: 4px 8px; border-radius: 6px; font-weight: 500; color: var(--navy);
-  box-shadow: 0 2px 6px rgba(0,0,0,.1);
-}
 
 .info-details { }
 .info-card {
@@ -632,6 +586,30 @@ footer {
   font-size: 12px; text-align: center; color: rgba(255,255,255,.3);
 }
 .footer-heart { color: var(--orange); }
+
+.about-3c-banner {
+        margin-top: 48px;
+        background: linear-gradient(135deg, rgba(173,66,67,.06) 0%, rgba(255,217,61,.08) 100%);
+        border: 1.5px solid rgba(173,66,67,.15);
+        border-radius: 16px;
+        padding: 32px 36px;
+        text-align: center;
+      }
+      .about-3c-banner-desc {
+        font-size: 15px; color: var(--muted); line-height: 1.95;
+        margin: 0;
+      }
+      .about-3c-row {
+        display: flex; gap: 12px; flex-wrap: wrap;
+      }
+      .about-3c-chip {
+        font-size: 14px; font-weight: 700;
+        padding: 9px 22px; border-radius: 30px;
+        letter-spacing: .02em;
+      }
+      .about-3c-chip.create    { background: #f3e8ff; color: #9340c8; border: 2px solid #d4a8f0; }
+      .about-3c-chip.connect   { background: #e4f2ff; color: #4a90d4; border: 2px solid #a0cdf0; }
+      .about-3c-chip.challenge { background: #fff4e0; color: #d4820a; border: 2px solid #f0c87a; }
 
 /* ── SCROLL REVEAL ── */
 .reveal {
@@ -811,6 +789,7 @@ footer {
             <div class="tl-dot"></div>
             <div class="tl-year">2025</div>
             <div class="tl-event">태성의 교훈, 정의/사랑/근로의 현대화 3C</div>
+            <a href="https://cafe.naver.com/taesunghs/44" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:4px; margin-top:4px; font-size:12px; color:var(--orange); font-weight:600; text-decoration:none; border:1.5px solid var(--orange); border-radius:20px; padding:2px 10px 2px 8px; transition:background .2s, color .2s;" onmouseover="this.style.background='var(--orange)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='var(--orange)'">📰 인터넷신문보기 &#8594;</a>
             <div class="tl-desc">정의롭게 창조하자. 사랑으로 연결하자. 성실하게 도전하자.</div>
           </div>
           <div class="tl-item">
@@ -833,31 +812,6 @@ footer {
       </div>
       <p class="about-3c-banner-desc"><strong>3C 비전</strong> 아래 학생들이 직접 만들어가는 이 자리에서 신나게 즐기며,<br>우리가 함께한 <strong style="color:var(--orange)">80년의 의미</strong>도 함께 나눠요.</p>
     </div>
-    <style>
-      .about-3c-banner {
-        margin-top: 48px;
-        background: linear-gradient(135deg, rgba(173,66,67,.06) 0%, rgba(255,217,61,.08) 100%);
-        border: 1.5px solid rgba(173,66,67,.15);
-        border-radius: 16px;
-        padding: 32px 36px;
-        text-align: center;
-      }
-      .about-3c-banner-desc {
-        font-size: 15px; color: var(--muted); line-height: 1.95;
-        margin: 0;
-      }
-      .about-3c-row {
-        display: flex; gap: 12px; flex-wrap: wrap;
-      }
-      .about-3c-chip {
-        font-size: 14px; font-weight: 700;
-        padding: 9px 22px; border-radius: 30px;
-        letter-spacing: .02em;
-      }
-      .about-3c-chip.create    { background: #f3e8ff; color: #9340c8; border: 2px solid #d4a8f0; }
-      .about-3c-chip.connect   { background: #e4f2ff; color: #4a90d4; border: 2px solid #a0cdf0; }
-      .about-3c-chip.challenge { background: #fff4e0; color: #d4820a; border: 2px solid #f0c87a; }
-    </style>
   </div>
 </section>
 
@@ -955,287 +909,7 @@ footer {
       <button class="bf-chip" onclick="setBoothFilter(&#39;도전&#39;,this)">도전 🔥 (13)</button>
       <button class="bf-chip" onclick="setBoothFilter(&#39;기본&#39;,this)">일반 (6)</button>
     </div>
-    <div class="booth-grid reveal visible" id="boothGrid"><div class="bc">
-      <span class="bc-num">#01</span>
-      <span class="bc-emoji">🏛️</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">태성80주년 역사관</div>
-      <div class="bc-loc">📍 좌측 스탠드 앞</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중학교 개교 80주년, 태성고등학교 74년을 기념하는 역사 전시관입니다. 개교 이래의 역사적 사진, 졸업앨범, 주요 사건들을 연대순으로 전시합니다. 기념사진출력도 해드려요.</div></div><div class="bc">
-      <span class="bc-num">#02</span>
-      <span class="bc-emoji">🎯</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">페르마의 밀실</div>
-      <div class="bc-loc">📍 좌측 스탠드 앞</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">예비 고등학생 중학교 친구들을 위한 특별 챌린지 부스! 다양한 미션을 수행하고 선물을 받아가세요.</div></div><div class="bc">
-      <span class="bc-num">#03</span>
-      <span class="bc-emoji">🏗️</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">함께 쌓는 태성의 꿈, 비전탑 쌓기</div>
-      <div class="bc-loc">📍 좌측 스탠드 앞</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성고의 미래 비전을 담은 탑 쌓기 체험 부스입니다. 꿈과 목표 카드를 적어 붙이고 함께 미래를 그려봅니다.</div></div><div class="bc">
-      <span class="bc-num">#04</span>
-      <span class="bc-emoji">🎨</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">용인예총 미술협회·청년작가회</div>
-      <div class="bc-loc">📍 좌측 하단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">용인예총 미술협회·청년작가회가 운영하는 아트 체험 부스. 공예 체험, 그림 그리기 등 재료비 무료!</div></div><div class="bc">
-      <span class="bc-num">#05</span>
-      <span class="bc-emoji">🍱</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 하단 좌측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">중학생 학부모님들이 직접 준비한 먹거리 부스. 어묵, 타코야끼, 만두탕수, 라면 등 다양한 간식, 수익금은 장학금으로! 가격 1~3천원 이내</div></div><div class="bc">
-      <span class="bc-num">#06</span>
-      <span class="bc-emoji">🍜</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 하단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">중학생 학부모님들이 직접 준비한 먹거리 부스. 어묵, 타코야끼, 만두탕수, 라면 등 다양한 간식, 수익금은 장학금으로! 가격 1~3천원 이내</div></div><div class="bc">
-      <span class="bc-num">#07</span>
-      <span class="bc-emoji">🍜</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 하단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">중학생 학부모님들이 직접 준비한 먹거리 부스. 어묵, 타코야끼, 만두탕수, 라면 등 다양한 간식, 수익금은 장학금으로! 가격 1~3천원 이내</div></div><div class="bc">
-      <span class="bc-num">#08</span>
-      <span class="bc-emoji">🛍️</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">필요한 건 다 있다! 생필품 바자회</div>
-      <div class="bc-loc">📍 하단 중앙</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">중학교 학부모님들이 준비한 알뜰 바자회. 합리적인 가격까지!</div></div><div class="bc">
-      <span class="bc-num">#09</span>
-      <span class="bc-emoji">🧃</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">잠깐, 쉬어가자 🌿 태성중 학생회 힐링존</div>
-      <div class="bc-loc">📍 하단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">중학교 학생회가 운영하는 휴식 부스. 학생들은 그냥 편하게 쉬러 오세요~</div></div><div class="bc">
-      <span class="bc-num">#10</span>
-      <span class="bc-emoji">📸</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">우리의 80번째 봄, 네컷에 담다</div>
-      <div class="bc-loc">📍 하단 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">친구들과 추억을 남기는 네컷사진 부스! 다양한 소품과 예쁜 배경으로 축제의 순간을 담아보세요.</div></div><div class="bc">
-      <span class="bc-num">#11</span>
-      <span class="bc-emoji">🥋</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">라온(Joyful) TaeSung TKD</div>
-      <div class="bc-loc">📍 하단 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!</div></div><div class="bc">
-      <span class="bc-num">#12</span>
-      <span class="bc-emoji">🥋</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">라온(Joyful) TaeSung TKD</div>
-      <div class="bc-loc">📍 하단 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!</div></div><div class="bc">
-      <span class="bc-num">#13</span>
-      <span class="bc-emoji">🧁</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">따뜻한 커피 한 잔과 함께, 동천제의 밤을 기억해요</div>
-      <div class="bc-loc">📍 우측 하단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">학교 안에 카페가 생겼다! 전문 카페 경력자 선생님들이 만들어주는 커피, 음료 한 잔 그리고 디저트까지 함께 하면서 축제를 함께 즐겨보시죠 :D</div></div><div class="bc">
-      <span class="bc-num">#14</span>
-      <span class="bc-emoji">🎁</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">80주년 기념 굿즈, 지금 바로 여기서!</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중고등학교 축제 공식 굿즈 판매 부스. 한정판 스티커, 키링 등 다양한 기념품!</div></div><div class="bc">
-      <span class="bc-num">#15</span>
-      <span class="bc-emoji">🚭</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">담배는 No, 건강은 Yes! 금연퀴즈 &amp; 폐활량 측정 체험</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">금연 캠페인 부스. 흡연의 위험성 전시, 금연 다짐 서약서 작성, 건강 퀴즈 등!</div></div><div class="bc">
-      <span class="bc-num">#16</span>
-      <span class="bc-emoji">🌸</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">어울리GO! 용기뽑GO!</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">일상 속 학교폭력 상황을 게임으로 체험하며 나의 선택이 주는 영향을 생각해 보는 참여형 부스입니다. 작은 용기를 내어 '어울림'의 가치를 함께 만들고, 추억의 뽑기로 깜짝 선물도 받아 가세요 ♥</div></div><div class="bc">
-      <span class="bc-num">#17</span>
-      <span class="bc-emoji">❓</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">오징어게임(Retro)</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">OX 퀴즈 이벤트! 학교 역사, 선생님에 관한 재미있는 퀴즈로 상품을 받아가세요. 다양한 도전게임도 함께해요.</div></div><div class="bc">
-      <span class="bc-num">#18</span>
-      <span class="bc-emoji">🏀</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">자유투 챌린지! 고득점을 노려라!</div>
-      <div class="bc-loc">📍 우측(농구장 옆)</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">농구 자유투 챌린지! 정해진 횟수 안에 최대한 많은 공을 넣어보세요. 랭킹 1위에게 특별 경품!</div></div><div class="bc">
-      <span class="bc-num">#19</span>
-      <span class="bc-emoji">⚽</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">슈팅챌린지! 고득점을 노려라!</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">과녁을 맞혀라! 고득점 시 선물 증정. 1인 1회 도전 가능!</div></div><div class="bc">
-      <span class="bc-num">#20</span>
-      <span class="bc-emoji">💦</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">너 나와~ 대결 2026, 물풍선 피구, 드라이존</div>
-      <div class="bc-loc">📍 우측 중앙</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">물풍선 피구 게임 준비 구역! 팀을 구성하고 물풍선을 받아 신나는 피구 게임을 즐겨보세요.</div></div><div class="bc">
-      <span class="bc-num">#21</span>
-      <span class="bc-emoji">🚑</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">삐보삐보 119</div>
-      <div class="bc-loc">📍 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">119 안전 체험 부스! CPR 체험, 화재 대피 시뮬레이션, 응급처치 교육 등 실생활 안전 지식!</div></div><div class="bc">
-      <span class="bc-num">#22</span>
-      <span class="bc-emoji">🎙️</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">동천제의 모든 순간을 담다 — 방송부 스케치 존</div>
-      <div class="bc-loc">📍 우측 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중고 방송부 전용 부스. 스케치영상 취재와 자료 Backup, Archiving을 한눈에 구경하세요.</div></div><div class="bc">
-      <span class="bc-num">#23</span>
-      <span class="bc-emoji">🚁</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">하늘을 달려라! 드론축구</div>
-      <div class="bc-loc">📍 우측 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">미래 스포츠 드론 축구 체험! 드론을 직접 조종하여 골을 넣어보세요.</div></div><div class="bc">
-      <span class="bc-num">#24</span>
-      <span class="bc-emoji">🎭</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">나만의 아트로 변신! 페이스페인팅 &amp; 타투스티커</div>
-      <div class="bc-loc">📍 우측 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">전문 아티스트의 페이스페인팅과 타투스티커 부스. 원하는 디자인으로 특별한 축제 메이크업!</div></div><div class="bc">
-      <span class="bc-num">#25</span>
-      <span class="bc-emoji">🎵</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">버스킹 무대</div>
-      <div class="bc-loc">📍 중앙 버스킹존</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">축제의 중심! 버스킹 무대. 밴드, 댄스, 마술, 독주 등 학생들의 재능 즉흥 공연!</div></div><div class="bc">
-      <span class="bc-num">#26</span>
-      <span class="bc-emoji">🔬</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">[태성]의 자랑, 화면 뚫고 나온 '찐' 선배! 공돌이용달이 왔다!</div>
-      <div class="bc-loc">📍 정의관 1층 교실</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">이공계를 꿈꾸는 학생들을 위한 특별 강연! [태성]의 자랑, 화면 뚫고 나온 '찐' 선배, 유튜버 공돌이용달이 왔다!</div></div><div class="bc">
-      <span class="bc-num">#27</span>
-      <span class="bc-emoji">🍦</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">잠깐, 쉬어가자 🌿 학생회 힐링존</div>
-      <div class="bc-loc">📍 상단 우측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">고등학교 학생회의 후식 부스. 시원한 아이스크림과 달콤한 간식으로 축제를 즐겨보세요!</div></div><div class="bc">
-      <span class="bc-num">#28</span>
-      <span class="bc-emoji">🏷️</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">교복도 득템! 교복 특가 판매</div>
-      <div class="bc-loc">📍 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">고등학교 학부모님들의 바자회. 문구류, 생활용품, 의류, 핸드메이드 소품 등 저렴하게!</div></div><div class="bc">
-      <span class="bc-num">#29</span>
-      <span class="bc-emoji">🎀</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">필요한 건 다 있다! 생필품 바자회</div>
-      <div class="bc-loc">📍 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">학부모님들의 정성이 담긴 바자회. 다양한 소품과 잡화를 합리적인 가격에! 다양한 물품 저렴하게!</div></div><div class="bc">
-      <span class="bc-num">#30</span>
-      <span class="bc-emoji">📦</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">필요한 건 다 있다! 생필품 바자회</div>
-      <div class="bc-loc">📍 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">학부모님들의 정성이 담긴 바자회. 다양한 소품과 잡화를 합리적인 가격에! 다양한 물품 저렴하게!</div></div><div class="bc">
-      <span class="bc-num">#31</span>
-      <span class="bc-emoji">🥘</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">츄러스, 그릴소세지, 회오리 핫도그 등 간단하고 맛있는 먹거리</div></div><div class="bc">
-      <span class="bc-num">#32</span>
-      <span class="bc-emoji">🍢</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">츄러스, 그릴소세지, 회오리 핫도그 등 간단하고 맛있는 먹거리</div></div><div class="bc">
-      <span class="bc-num">#33</span>
-      <span class="bc-emoji">🍕</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">배고프면 여기! 먹거리 총집합</div>
-      <div class="bc-loc">📍 상단 좌측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">츄러스, 그릴소세지, 회오리 핫도그 등 간단하고 맛있는 먹거리</div></div><div class="bc">
-      <span class="bc-num">#34</span>
-      <span class="bc-emoji">🎯</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">태성나눔챌린지 (80초 챌린지)</div>
-      <div class="bc-loc">📍 좌측 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">80초 미션 챌린지, 모두 도전!</div></div><div class="bc">
-      <span class="bc-num">#35</span>
-      <span class="bc-emoji">🎯</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">태성나눔챌린지 (80초 챌린지)</div>
-      <div class="bc-loc">📍 좌측 상단</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">80초 미션 챌린지, 모두 도전!</div></div><div class="bc">
-      <span class="bc-num">#36</span>
-      <span class="bc-emoji">⛳</span>
-      <span class="bc-type type-challenge">도전부스 🔥</span>
-      <div class="bc-name">홀인원 도전! 총동문회 퍼팅 대회</div>
-      <div class="bc-loc">📍 좌측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성고 총동문회 미니 골프 퍼팅 대회! 동문 선배님들과 재학생이 함께하는 세대 교류의 장.</div></div><div class="bc">
-      <span class="bc-num">#37</span>
-      <span class="bc-emoji">🎓</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">꿈을 응원합니다 — 총동문회 장학금</div>
-      <div class="bc-loc">📍 좌측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">총동문회 장학금 관련 부스. 장학금 신청 안내, 동문 진로 멘토링, 합격 수기 전시!</div></div><div class="bc">
-      <span class="bc-num">#38</span>
-      <span class="bc-emoji">💡</span>
-      <span class="bc-type type-create">창조부스 ✨</span>
-      <div class="bc-name">태성을 알고 싶다면? 3C 설명 Zone</div>
-      <div class="bc-loc">📍 좌측</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중고 교육 철학 3C(Create · Connect · Challenge) 소개 부스. 진학 상담도 가능!</div></div><div class="bc">
-      <span class="bc-num">#39</span>
-      <span class="bc-emoji">📱</span>
-      <span class="bc-type type-connect">연결부스 🔗</span>
-      <div class="bc-name">팔로우하고 함께해요! 태성고 SNS와 신문 소개</div>
-      <div class="bc-loc">📍 좌측(본부 옆)</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중고등학교 공식 SNS 채널 홍보 부스. 팔로우 시 소정의 선물 지급!</div></div><div class="bc">
-      <span class="bc-num">#40</span>
-      <span class="bc-emoji">🌂</span>
-      <span class="bc-type type-basic">일반부스</span>
-      <div class="bc-name">태성 여권으로 시작하세요!</div>
-      <div class="bc-loc">📍 좌측(본부 앞)</div>
-      <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태성중고 축제 특별 여권(스탬프북)과 우비 나눔 부스! 스탬프를 다 모으면 특별 경품!</div></div></div>
+    <div class="booth-grid reveal visible" id="boothGrid"></div>
   </div>
 </section>
 
@@ -1568,7 +1242,6 @@ function setMapFilter(f, el) {
   renderPins();
 }
 
-
 function selectFp(f, el) {
   mapFilter = f;
   document.querySelectorAll('.fp-btn').forEach(b => b.classList.remove('on'));
@@ -1687,6 +1360,30 @@ function setStage(s, el) {
   }
 }
 
+.about-3c-banner {
+        margin-top: 48px;
+        background: linear-gradient(135deg, rgba(173,66,67,.06) 0%, rgba(255,217,61,.08) 100%);
+        border: 1.5px solid rgba(173,66,67,.15);
+        border-radius: 16px;
+        padding: 32px 36px;
+        text-align: center;
+      }
+      .about-3c-banner-desc {
+        font-size: 15px; color: var(--muted); line-height: 1.95;
+        margin: 0;
+      }
+      .about-3c-row {
+        display: flex; gap: 12px; flex-wrap: wrap;
+      }
+      .about-3c-chip {
+        font-size: 14px; font-weight: 700;
+        padding: 9px 22px; border-radius: 30px;
+        letter-spacing: .02em;
+      }
+      .about-3c-chip.create    { background: #f3e8ff; color: #9340c8; border: 2px solid #d4a8f0; }
+      .about-3c-chip.connect   { background: #e4f2ff; color: #4a90d4; border: 2px solid #a0cdf0; }
+      .about-3c-chip.challenge { background: #fff4e0; color: #d4820a; border: 2px solid #f0c87a; }
+
 /* ── SCROLL REVEAL ── */
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
@@ -1697,6 +1394,5 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 renderPins();
 renderBooths();
 </script>
-
 
 </body></html>
