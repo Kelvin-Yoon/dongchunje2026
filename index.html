@@ -1245,20 +1245,15 @@ footer {
     </div>
     <div class="info-grid reveal visible">
       <div class="map-embed" style="padding:0; background:none; border:none; display:flex; flex-direction:column; height:auto; gap:10px;">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3172.5!2d127.0811!3d37.2497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357b5b2f7c6b5555%3A0x0!2z7YWM7ISc6rSR65ON7ZWc6rWQ!5e0!3m2!1sko!2skr!4v1700000000000!5m2!1sko!2skr&q=태성고등학교+용인시"
-          width="100%" height="300"
-          style="border:none; border-radius:16px; display:block;"
-          allowfullscreen
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="태성고등학교 위치">
-        </iframe>
-        <a href="https://maps.google.com/?q=태성고등학교+용인" target="_blank"
+        <!-- 카카오맵 정적 이미지 -->
+        <a href="https://map.kakao.com/?urlX=546300&urlY=1036253&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false" target="_blank">
+          <img width="504" height="620" src="https://staticmap.kakao.com/map/mapservice?FORMAT=PNG&SCALE=2.5&MX=546300&MY=1036252&S=0&IW=504&IH=620&LANG=0&COORDSTM=WCONGNAMUL&logo=kakao_logo" style="border:1px solid #ccc; border-radius:16px; display:block; width:100%; height:auto;">
+        </a>
+        <a href="https://map.kakao.com/?urlX=546300&urlY=1036253&urlLevel=3&map_type=TYPE_MAP&map_hybrid=false" target="_blank"
           style="display:inline-flex; align-items:center; justify-content:center; gap:6px;
                  background:var(--orange); color:white; text-decoration:none;
                  padding:8px 20px; border-radius:20px; font-size:13px; font-weight:700; width:fit-content; margin:0 auto;">
-          🗺️ 구글 지도에서 보기
+          🗺️ 카카오맵에서 보기
         </a>
       </div>
       <div class="info-details">
@@ -1266,7 +1261,7 @@ footer {
           <div class="info-icon">📅</div>
           <div>
             <div class="info-label">일시</div>
-            <div class="info-value">2026년 5월 22일 (금)<br>오후 3:00 – 오후 7:00</div>
+            <div class="info-value">2026년 5월 22일 (금)<br>오후 3:00 – 오후 8:00</div>
           </div>
         </div>
         <div class="info-card">
@@ -1274,14 +1269,31 @@ footer {
           <div>
             <div class="info-label">장소</div>
             <div class="info-value">태성빌리지 (태성중·고등학교 캠퍼스 전체)</div>
-            <div class="info-small">경기도 ○○시 ○○구 태성로 123</div>
+            <div class="info-small">경기도 용인시 처인구 백옥대로 1059-2 (남동 28)</div>
           </div>
         </div>
         <div class="info-card">
           <div class="info-icon">🚌</div>
-          <div>
+          <div style="width:100%">
             <div class="info-label">대중교통</div>
-            <div class="info-value">○○역 2번 출구 → 마을버스 12분<br>버스 ○○번 '태성중고' 정류장 하차</div>
+            <table style="width:100%; border-collapse:collapse; margin-top:8px; font-size:13px; line-height:1.7;">
+              <tr>
+                <td style="white-space:nowrap; font-weight:700; color:var(--orange); padding:3px 10px 3px 0; vertical-align:top;">🚇 경전철</td>
+                <td style="color:var(--navy);">용인중앙시장역에서 10분 거리</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap; font-weight:700; color:var(--orange); padding:3px 10px 3px 0; vertical-align:top;">🚍 직행</td>
+                <td style="color:var(--muted);">5000, 5001, 5002A, 5002B, 5005, 5700A, 5700B</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap; font-weight:700; color:var(--orange); padding:3px 10px 3px 0; vertical-align:top;">🚌 일반</td>
+                <td style="color:var(--muted);">6, 6-1, 11-1, 21, 22, 22-1, 24-1, 24-2, 72, 75, 91, 92, 92-1, 93-1, 820</td>
+              </tr>
+              <tr>
+                <td style="white-space:nowrap; font-weight:700; color:var(--orange); padding:3px 10px 3px 0; vertical-align:top;">🚐 마을</td>
+                <td style="color:var(--muted);">5</td>
+              </tr>
+            </table>
           </div>
         </div>
         <div class="info-card">
