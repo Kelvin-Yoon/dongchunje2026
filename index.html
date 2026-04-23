@@ -8,16 +8,17 @@
 <!-- Open Graph / 링크 공유 미리보기 -->
 <meta property="og:title" content="동천제 2026에 초대합니다.">
 <meta property="og:description" content="태성중·고 개교 80주년 기념 축제. 2026년 5월 22일 오후 3시, 태성빌리지에서 여러분을 기다립니다!">
-<meta property="og:image" content="invitation.png">
+<meta property="og:image" content="invitation1.png">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="400">
 <meta property="og:type" content="website">
 
 <!-- 카카오톡 등 추가 지원 -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="invitation.png">
+<meta name="twitter:image" content="invitation1.png">
 <link rel="preconnect" href="https://fonts.googleapis.com/">
 <link href="./index_v2_files/css2" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 <style>
 :root {
   --orange: #ad4243;
@@ -232,19 +233,88 @@ section { padding: 96px 5%; }
 .meaning-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
 
 .slogan-box {
-  background: var(--navy); border-radius: 20px;
-  padding: 40px 32px; text-align: center;
-  position: relative; overflow: hidden; margin-bottom: 20px;
+  background: linear-gradient(160deg, #0d1230 0%, #1a1a3e 60%, #0d1a2e 100%);
+  border-radius: 20px;
+  padding: 44px 32px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: 1.5px solid rgba(255,220,100,0.13);
 }
 .slogan-box::before {
-  content: '80'; position: absolute;
+  content: '80';
+  position: absolute;
   font-family: 'Black Han Sans', sans-serif;
-  font-size: 180px; color: rgba(255,255,255,.03);
-  top: -30px; right: -20px; line-height: 1; pointer-events: none;
+  font-size: 200px;
+  color: rgba(255,255,255,.025);
+  top: -30px; right: -20px;
+  line-height: 1; pointer-events: none;
 }
-.slogan-tag { font-size: 11px; color: var(--orange); font-weight: 700; letter-spacing: .1em; margin-bottom: 14px; }
-.slogan-main { font-family: 'Black Han Sans', sans-serif; font-size: 30px; color: var(--yellow); line-height: 1.25; margin-bottom: 10px; }
-.slogan-sub { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.7; }
+.slogan-stars {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+}
+.slogan-tag {
+  font-size: 11px;
+  color: var(--orange);
+  font-weight: 700;
+  letter-spacing: .15em;
+  margin-bottom: 18px;
+  position: relative; z-index: 2;
+}
+.slogan-script {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(30px, 5vw, 46px);
+  font-weight: 700;
+  color: #ffe47a;
+  line-height: 1.1;
+  margin-bottom: -4px;
+  position: relative; z-index: 2;
+  text-shadow:
+    0 0 8px rgba(255,220,80,0.95),
+    0 0 20px rgba(255,200,60,0.75),
+    0 0 45px rgba(255,180,40,0.5),
+    0 0 80px rgba(255,160,20,0.3);
+  animation: slogan-pulse 3s ease-in-out infinite;
+}
+@keyframes slogan-pulse {
+  0%, 100% {
+    text-shadow:
+      0 0 8px rgba(255,220,80,0.95),
+      0 0 20px rgba(255,200,60,0.75),
+      0 0 45px rgba(255,180,40,0.5),
+      0 0 80px rgba(255,160,20,0.3);
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(255,230,100,1),
+      0 0 30px rgba(255,210,80,0.9),
+      0 0 60px rgba(255,190,50,0.7),
+      0 0 100px rgba(255,160,20,0.45),
+      0 0 140px rgba(255,140,10,0.25);
+  }
+}
+.slogan-arc {
+  position: relative; z-index: 2;
+  height: 22px; margin: 0 0 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+.slogan-arc svg { width: 80%; max-width: 300px; height: 22px; overflow: visible; }
+.slogan-main {
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: clamp(26px, 4.5vw, 38px);
+  color: #FFD93D;
+  line-height: 1.2;
+  margin-bottom: 14px;
+  position: relative; z-index: 2;
+  letter-spacing: -0.01em;
+}
+.slogan-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.85;
+  position: relative; z-index: 2;
+}
 
 .timeline { position: relative; padding-left: 30px; }
 .timeline::before {
@@ -768,10 +838,80 @@ footer {
     <div class="meaning-grid">
       <div class="reveal visible">
         <div class="slogan-box">
+          <canvas class="slogan-stars" id="sloganStars"></canvas>
           <div class="slogan-tag">2026 SLOGAN</div>
+          <div class="slogan-script">Shine your light</div>
+          <div class="slogan-arc">
+            <svg viewBox="0 0 300 22" xmlns="http://www.w3.org/2000/svg" overflow="visible">
+              <defs>
+                <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="rgba(255,210,80,0)"/>
+                  <stop offset="35%" stop-color="rgba(255,220,90,0.7)"/>
+                  <stop offset="50%" stop-color="rgba(255,230,100,1)"/>
+                  <stop offset="65%" stop-color="rgba(255,220,90,0.7)"/>
+                  <stop offset="100%" stop-color="rgba(255,210,80,0)"/>
+                </linearGradient>
+                <filter id="arcGlow">
+                  <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                </filter>
+              </defs>
+              <path d="M 0 18 Q 150 2 300 18" fill="none" stroke="url(#arcGrad)" stroke-width="1.5" filter="url(#arcGlow)" opacity="0.9"/>
+              <g transform="translate(150, 10)" filter="url(#arcGlow)">
+                <line x1="0" y1="-9" x2="0" y2="9" stroke="#ffe47a" stroke-width="1.2" opacity="0.95"/>
+                <line x1="-9" y1="0" x2="9" y2="0" stroke="#ffe47a" stroke-width="1.2" opacity="0.95"/>
+                <line x1="-5.5" y1="-5.5" x2="5.5" y2="5.5" stroke="#ffe47a" stroke-width="0.7" opacity="0.7"/>
+                <line x1="5.5" y1="-5.5" x2="-5.5" y2="5.5" stroke="#ffe47a" stroke-width="0.7" opacity="0.7"/>
+                <circle cx="0" cy="0" r="2" fill="#fffbe8"/>
+              </g>
+              <g transform="translate(52, 5)">
+                <line x1="0" y1="-5" x2="0" y2="5" stroke="#ffe47a" stroke-width="0.8" opacity="0.7"/>
+                <line x1="-5" y1="0" x2="5" y2="0" stroke="#ffe47a" stroke-width="0.8" opacity="0.7"/>
+                <circle cx="0" cy="0" r="1.2" fill="#fffbe8" opacity="0.85"/>
+              </g>
+              <g transform="translate(248, 4)">
+                <line x1="0" y1="-4" x2="0" y2="4" stroke="#ffe47a" stroke-width="0.8" opacity="0.65"/>
+                <line x1="-4" y1="0" x2="4" y2="0" stroke="#ffe47a" stroke-width="0.8" opacity="0.65"/>
+                <circle cx="0" cy="0" r="1" fill="#fffbe8" opacity="0.8"/>
+              </g>
+            </svg>
+          </div>
           <div class="slogan-main display">함께, 80년을 넘어</div>
           <div class="slogan-sub">과거의 전통 위에 미래를 그리다<br>태성의 모든 세대가 하나 되는 동천제</div>
         </div>
+        <script>
+        (function(){
+          const canvas = document.getElementById('sloganStars');
+          if (!canvas) return;
+          const ctx = canvas.getContext('2d');
+          function resize() {
+            const box = canvas.parentElement;
+            canvas.width = box.offsetWidth;
+            canvas.height = box.offsetHeight;
+          }
+          resize();
+          window.addEventListener('resize', resize);
+          const stars = Array.from({length: 55}, () => ({
+            x: Math.random(), y: Math.random(),
+            r: Math.random() * 1.4 + 0.3,
+            speed: Math.random() * 0.008 + 0.003,
+            phase: Math.random() * Math.PI * 2
+          }));
+          function draw(ts) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const t = ts * 0.001;
+            stars.forEach(s => {
+              const alpha = (Math.sin(t * s.speed * 6 + s.phase) * 0.5 + 0.5) * 0.75 + 0.1;
+              ctx.beginPath();
+              ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+              ctx.fillStyle = `rgba(255,235,140,${alpha})`;
+              ctx.fill();
+            });
+            requestAnimationFrame(draw);
+          }
+          requestAnimationFrame(draw);
+        })();
+        </script>
         <div class="quote-cards">
           <div class="quote-card">
             <div class="quote-text">"80년이라는 긴 시간 동안 태성을 사랑해 주신 모든 분들께 감사드리며, 오늘 이 자리가 학생들에게 소중한 추억이 되길 바랍니다."</div>
