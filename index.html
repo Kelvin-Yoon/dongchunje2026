@@ -522,7 +522,7 @@ section { padding: 96px 5%; }
   font-size: 12px; color: var(--muted); margin-bottom: 14px;
 }
 .popup-meta span { display: inline-flex; align-items: center; gap: 4px; }
-.popup-desc { font-size: 14px; line-height: 1.8; color: var(--navy); }
+.popup-desc { font-size: 14px; line-height: 1.8; color: var(--navy); white-space: pre-line; }
 .popup-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 16px; }
 .popup-tag {
   font-size: 11px; padding: 3px 10px; border-radius: 12px;
@@ -1185,14 +1185,14 @@ footer {
       <div class="bc-name">라온(Joyful) TaeSung TKD</div>
       <div class="bc-loc">📍 하단 우측</div>
       <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!</div></div><div class="bc">
+      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등! 🥽 VR 태권도 겨루기 가상체험도 즐겨보세요. 겨루기 드루와드루와~</div></div><div class="bc">
       <span class="bc-num">#12</span>
       <span class="bc-emoji">🥋</span>
       <span class="bc-type type-challenge">도전부스 🔥</span>
       <div class="bc-name">라온(Joyful) TaeSung TKD</div>
       <div class="bc-loc">📍 하단 우측</div>
       <div class="bc-time">🕒 15:00~19:00</div>
-      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!</div></div><div class="bc">
+      <div class="bc-desc">태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등! 🥽 VR 태권도 겨루기 가상체험도 즐겨보세요. 겨루기 드루와드루와~</div></div><div class="bc">
       <span class="bc-num">#13</span>
       <span class="bc-emoji">🧁</span>
       <span class="bc-type type-basic">일반부스</span>
@@ -1404,28 +1404,57 @@ footer {
       <button class="tt-tab on" onclick="setStage(&#39;main&#39;,this)">운동장</button>
       <button class="tt-tab" onclick="setStage(&#39;sub&#39;,this)">부스 운영</button>
     </div>
-    <div class="tt-timeline reveal visible">
-      <div class="tt-hour">15:00</div>
-      <div class="tt-hour">16:00</div>
-      <div class="tt-hour">17:00</div>
-      <div class="tt-hour">18:00</div>
-      <div class="tt-hour">19:00</div>
-    </div>
+
     <div class="tt-tracks reveal visible" id="ttContent">
       <div class="tt-track">
         <div class="tt-track-label">운동장</div>
         <div class="tt-row">
           <div class="tt-block main"><span class="tt-time">15:00 – 15:10</span><div class="tt-name display">개막식 &amp; 80주년 기념사</div><div class="tt-team">전교생·교직원·내빈</div></div>
-          <div class="tt-block sub"><span class="tt-time">15:30 – 18:30</span><div class="tt-name display">오프닝 버스킹</div><div class="tt-team">밴드부 · 댄스부</div></div>
-          <div class="tt-block small"><span class="tt-time">15:00 – 19:30</span><div class="tt-name display">부스 운영</div><div class="tt-team">부스별 교사</div></div>
         </div>
       </div>
       <div class="tt-track" style="margin-top:12px">
         <div class="tt-track-label">공연장(키움관)</div>
         <div class="tt-row">
-          <div class="tt-block main"><span class="tt-time">18:30 – 18:50</span><div class="tt-name display">태성중 밴드</div><div class="tt-team">태성중 밴드</div></div>
-          <div class="tt-block special"><span class="tt-time">18:50 – 19:20</span><div class="tt-name display">태성고 밴드/댄스팀공연</div><div class="tt-team">태성고 밴드/댄스팀공연</div></div>
+          <div class="tt-block main"><span class="tt-time">18:30 – 18:50</span><div class="tt-name display">태성중 밴드 공연</div><div class="tt-team">통기타부 · 밴드부</div></div>
+          <div class="tt-block special"><span class="tt-time">18:50 – 19:20</span><div class="tt-name display">태성고 밴드 공연</div><div class="tt-team">뮤즈 · 페이드-인</div></div>
           <div class="tt-block sub"><span class="tt-time">19:30 – 20:00</span><div class="tt-name display">피날레공연 &amp; 폐막</div><div class="tt-team">전교생 합창 · 불꽃 피날레</div></div>
+        </div>
+      </div>
+
+      <!-- 공연 라인업 상세 -->
+      <div class="tt-track" style="margin-top:20px">
+        <div class="tt-track-label">🎸 공연 라인업</div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap:12px; margin-top:4px;">
+          <div style="background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.12); border-radius:12px; padding:16px 18px;">
+            <div style="font-size:10px; font-weight:700; color:var(--teal); letter-spacing:.08em; margin-bottom:6px;">태성중 통기타부</div>
+            <div style="font-family:'Black Han Sans',sans-serif; font-size:16px; color:var(--white); margin-bottom:6px;">oooo</div>
+            <div style="font-size:12px; color:rgba(255,255,255,.65); line-height:1.8;">
+              🎵 개똥벌레 <span style="opacity:.5;">— 신형원</span>
+            </div>
+          </div>
+          <div style="background:rgba(255,255,255,.07); border:1.5px solid rgba(255,255,255,.12); border-radius:12px; padding:16px 18px;">
+            <div style="font-size:10px; font-weight:700; color:var(--teal); letter-spacing:.08em; margin-bottom:6px;">태성중 밴드부</div>
+            <div style="font-family:'Black Han Sans',sans-serif; font-size:16px; color:var(--white); margin-bottom:6px;">태성볼륨</div>
+            <div style="font-size:12px; color:rgba(255,255,255,.65); line-height:1.8;">
+              🎵 예뻤어 <span style="opacity:.5;">— DAY6</span><br>
+              🎵 그대에게 <span style="opacity:.5;">— 무한궤도</span>
+            </div>
+          </div>
+          <div style="background:rgba(255,217,61,.08); border:1.5px solid rgba(255,217,61,.2); border-radius:12px; padding:16px 18px;">
+            <div style="font-size:10px; font-weight:700; color:var(--yellow); letter-spacing:.08em; margin-bottom:6px;">태성고 밴드부</div>
+            <div style="font-family:'Black Han Sans',sans-serif; font-size:16px; color:var(--white); margin-bottom:6px;">뮤즈</div>
+            <div style="font-size:12px; color:rgba(255,255,255,.65); line-height:1.8;">
+              🎵 안티프리즈 <span style="opacity:.5;">— 검정치마</span><br>
+              🎵 작은 봄 <span style="opacity:.5;">— 고추잠자리</span>
+            </div>
+          </div>
+          <div style="background:rgba(255,217,61,.08); border:1.5px solid rgba(255,217,61,.2); border-radius:12px; padding:16px 18px;">
+            <div style="font-size:10px; font-weight:700; color:var(--yellow); letter-spacing:.08em; margin-bottom:6px;">태성고 밴드부</div>
+            <div style="font-family:'Black Han Sans',sans-serif; font-size:16px; color:var(--white); margin-bottom:6px;">페이드-인</div>
+            <div style="font-size:12px; color:rgba(255,255,255,.65); line-height:1.8;">
+              🎵 좋아합니다 <span style="opacity:.5;">— DAY6</span>
+            </div>
+          </div>
         </div>
       </div></div>
 
@@ -1435,12 +1464,6 @@ footer {
         <div class="event-name display">80주년 특별공연</div>
         <div class="event-time">19:30 · 메인 스테이지</div>
         <div class="event-desc">태성을 축하해주기 위해 방문한 연예인들의 특별공연이 있습니다.</div>
-      </div>
-      <div class="event-card">
-        <span class="event-icon">🏆</span>
-        <div class="event-name display">댄스 배틀</div>
-        <div class="event-time">17:00 · 메인 스테이지</div>
-        <div class="event-desc">중학교 vs 고등학교! 뜨거운 댄스 대결로 최고의 팀을 가립니다.</div>
       </div>
       <div class="event-card">
         <span class="event-icon">🎆</span>
@@ -1580,8 +1603,8 @@ const BOOTHS = [
   {id:8, type:'연결', emoji:'🛍️', name:'필요한 건 다 있다! 생필품 바자회', cat:'바자회', loc:'하단 중앙', time:'15:00~19:00', desc:'중학교 학부모님들이 준비한 알뜰 바자회. 합리적인 가격까지!', tags:['바자회','학부모','의류','도서'], px:48.9, py:80.95},
   {id:9, type:'기본', emoji:'🧃', name:'잠깐, 쉬어가자 🌿 태성중 학생회 힐링존', cat:'먹거리/휴식', loc:'하단', time:'15:00~19:00', desc:'고등학교 학생회가 운영하는 휴식 부스. 학생들은 그냥 편하게 쉬러 오세요~', tags:['휴식','학생회','아이스크림','음료'], px:53.8, py:80.55},
   {id:10, type:'연결', emoji:'📸', name:'우리의 80번째 봄, 네컷에 담다', cat:'포토/체험', loc:'하단 우측', time:'15:00~19:00', desc:'친구들과 추억을 남기는 네컷사진 부스! 다양한 소품과 예쁜 배경으로 축제의 순간을 담아보세요.', tags:['사진','포토부스','추억','즉석인화'], px:59.0, py:80.45},
-  {id:11, type:'도전', emoji:'🥋', name:'라온(Joyful) TaeSung TKD', cat:'스포츠/체험', loc:'하단 우측', time:'15:00~19:00', desc:'태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!', tags:['태권도','체험','시연','스포츠'], px:65.1, py:80.05},
-  {id:12, type:'도전', emoji:'🥋', name:'라온(Joyful) TaeSung TKD', cat:'스포츠/체험', loc:'하단 우측', time:'15:00~19:00', desc:'태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등!', tags:['태권도','체험','시연','스포츠'], px:70.7, py:79.75},
+  {id:11, type:'도전', emoji:'🥋', name:'라온(Joyful) TaeSung TKD', cat:'스포츠/체험', loc:'하단 우측', time:'15:00~19:00', desc:'태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등! 🥽 VR 태권도 겨루기 가상체험도 즐겨보세요. 겨루기 드루와드루와~', tags:['태권도','VR','겨루기','체험','시연','스포츠'], px:65.1, py:80.05},
+  {id:12, type:'도전', emoji:'🥋', name:'라온(Joyful) TaeSung TKD', cat:'스포츠/체험', loc:'하단 우측', time:'15:00~19:00', desc:'태권도부 학생들이 운영하는 홍보 부스. 태권도 기본 동작 체험, 격파 시연 관람 등! 🥽 VR 태권도 겨루기 가상체험도 즐겨보세요. 겨루기 드루와드루와~', tags:['태권도','VR','겨루기','체험','시연','스포츠'], px:70.7, py:79.75},
   {id:13, type:'기본', emoji:'🧁', name:'따뜻한 커피 한 잔과 함께, 동천제의 밤을 기억해요', cat:'먹거리', loc:'우측 하단', time:'15:00~19:00', desc:"학교 안에 카페가 생겼다! 전문 카페 경력자 선생님들이 만들어주는 커피, 음료 한 잔 그리고 디저트까지 함께 하면서 축제를 함께 즐겨보시죠 :D", tags:['디저트','수제','쿠키','달콤'], px:74.65, py:75.6},
   {id:14, type:'창조', emoji:'🎁', name:'80주년 기념 굿즈, 지금 바로 여기서!', cat:'판매', loc:'우측', time:'15:00~19:00', desc:'태성중고등학교 축제 공식 굿즈 판매 부스. 한정판 스티커, 키링 등 다양한 기념품!', tags:['굿즈','기념품','한정판','스티커'], px:74.65, py:71.7},
   {id:15, type:'도전', emoji:'🚭', name:'담배는 No, 건강은 Yes! 금연퀴즈 & 폐활량 측정 체험', cat:'보건/캠페인', loc:'우측', time:'15:00~19:00', desc:'금연 캠페인 부스. 흡연의 위험성 전시, 금연 다짐 서약서 작성, 건강 퀴즈 등!', tags:['금연','건강','캠페인','보건'], px:74.65, py:67.7},
@@ -1610,7 +1633,7 @@ const BOOTHS = [
   {id:38, type:'창조', emoji:'💡', name:'태성을 알고 싶다면? 3C 설명 Zone', cat:'교육/홍보', loc:'좌측', time:'15:00~19:00', desc:'태성중고 교육 철학 3C(Create · Connect · Challenge) 소개 부스. 진학 상담도 가능!', tags:['교육','3C','학교홍보','입학상담'], px:27.65, py:46.5},
   {id:39, type:'연결', emoji:'📱', name:'팔로우하고 함께해요! 태성고 SNS와 신문 소개', cat:'홍보/이벤트', loc:'좌측(본부 옆)', time:'15:00~19:00', desc:'태성중고등학교 공식 SNS 채널 홍보 부스. 팔로우 시 소정의 선물 지급!', tags:['SNS','인스타그램','유튜브','홍보'], px:27.45, py:50.7},
   {id:40, type:'기본', emoji:'🌂', name:'태성 여권으로 시작하세요!', cat:'나눔/이벤트', loc:'좌측(본부 앞)', time:'15:00~19:00', desc:'태성중고 축제 특별 여권(스탬프북)과 우비 나눔 부스! 스탬프를 다 모으면 특별 경품!', tags:['여권','스탬프','우비','이벤트'], px:27.65, py:54.5},
-  {id:41, type:'기본', emoji:'🎤', name:'공연장', cat:'공연/행사', loc:'공연장(키움관)', time:'18:30~20:00', desc:'태성중 밴드, 태성고 밴드/댄스팀 공연, 피날레 공연 및 폐막식이 열리는 공연장입니다.', tags:['공연','밴드','댄스','피날레'], px:60.0, py:93.0},
+  {id:41, type:'기본', emoji:'🎤', name:'공연장 (키움관)', cat:'공연/행사', loc:'공연장(키움관)', time:'18:30~20:00', desc:'🎸 태성중 통기타부 [oooo] — 개똥벌레(신형원)\n🎸 태성중 밴드부 [태성볼륨] — 예뻤어(DAY6), 그대에게(무한궤도)\n🎸 태성고 밴드부 [뮤즈] — 안티프리즈(검정치마), 작은 봄(고추잠자리)\n🎸 태성고 밴드부 [페이드-인] — 좋아합니다(DAY6)\n🎆 피날레 공연 & 폐막식 — 전교생 합창·불꽃 피날레', tags:['공연','밴드','통기타','태성볼륨','뮤즈','페이드-인','DAY6','피날레'], px:60.0, py:93.0},
 ];
 
 /* ── 타입 메타 ── */
@@ -1824,16 +1847,14 @@ function setStage(s, el) {
       <div class="tt-track">
         <div class="tt-track-label">MAIN STAGE</div>
         <div class="tt-row">
-          <div class="tt-block main"><span class="tt-time">15:00 – 15:30</span><div class="tt-name display">개막식 &amp; 80주년 기념사</div><div class="tt-team">전교생·교직원·내빈</div></div>
-          <div class="tt-block sub"><span class="tt-time">15:30 – 16:30</span><div class="tt-name display">오프닝 버스킹</div><div class="tt-team">밴드부 · 댄스부</div></div>
-          <div class="tt-block small"><span class="tt-time">16:30 – 17:00</span><div class="tt-name display">장기자랑</div><div class="tt-team">각 반 대표팀</div></div>
+          <div class="tt-block main"><span class="tt-time">15:00 – 15:10</span><div class="tt-name display">개막식 &amp; 80주년 기념사</div><div class="tt-team">전교생·교직원·내빈</div></div>
+          <div class="tt-block sub"><span class="tt-time">15:30 – 18:30</span><div class="tt-name display">오프닝 버스킹</div><div class="tt-team">밴드부 · 댄스부</div></div>
         </div>
       </div>
       <div class="tt-track" style="margin-top:12px">
         <div class="tt-track-label">EVENING</div>
         <div class="tt-row">
-          <div class="tt-block main"><span class="tt-time">17:00 – 17:45</span><div class="tt-name display">댄스 배틀</div><div class="tt-team">고1·2·3 vs 중1·2·3</div></div>
-          <div class="tt-block special"><span class="tt-time">17:45 – 18:30</span><div class="tt-name display">80주년 특별공연</div><div class="tt-team">동창 밴드 &amp; 현재 밴드부</div></div>
+          <div class="tt-block special"><span class="tt-time">17:00 – 18:30</span><div class="tt-name display">80주년 특별공연</div><div class="tt-team">동창 밴드 &amp; 현재 밴드부</div></div>
           <div class="tt-block sub"><span class="tt-time">18:30 – 19:00</span><div class="tt-name display">피날레 &amp; 폐막</div><div class="tt-team">전교생 합창 · 불꽃 피날레</div></div>
         </div>
       </div>`;
